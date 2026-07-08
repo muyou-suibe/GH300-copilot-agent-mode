@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { fetchCollection } from '../api'
+import { fetchEndpoint } from '../api'
+
+const leaderboardEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  : 'http://localhost:8000/api/leaderboard/'
 
 function Leaderboard() {
   const [entries, setEntries] = useState([])
@@ -9,7 +13,7 @@ function Leaderboard() {
   useEffect(() => {
     let ignore = false
 
-    fetchCollection('leaderboard')
+    fetchEndpoint(leaderboardEndpoint)
       .then((items) => {
         if (!ignore) {
           setEntries(items)

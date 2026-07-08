@@ -34,3 +34,13 @@ export async function fetchCollection(collection) {
 
   return normalizeCollection(await response.json())
 }
+
+export async function fetchEndpoint(endpointUrl) {
+  const response = await fetch(endpointUrl)
+
+  if (!response.ok) {
+    throw new Error(`Request failed with ${response.status}`)
+  }
+
+  return normalizeCollection(await response.json())
+}
